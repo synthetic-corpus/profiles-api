@@ -70,7 +70,7 @@ class HelloViewSet(viewsets.ViewSet):
         return Response({'Message':'hello','a_viewset':a_viewset})
 
     def create(self, request):
-        """ create a new hello message """
+        """ create a new hello message. post request """
         serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
@@ -84,19 +84,19 @@ class HelloViewSet(viewsets.ViewSet):
             )
 
     def retrieve(self, request, pk=None):
-        """ Retrieves an object """
+        """ Retrieves an object. Get crequest. """
         return Response({'http_method': 'GET'})
     
     def update(self, request, pk=None):
-        """ Handles updating an object """
+        """ Handles updating an object. Put request. """
         return Response({'http_method': 'PUT'})
 
     def partial_update(self, request, pk=None):
-        """ Deletes an Object """
+        """ A Patch Request. """
         return Response({'http_method': 'PATCH'})
     
     def destroy(self, request, pk=None):
-        """ Handle removing an object """
+        """ Handle removing an object a delete request. """
         return Response({'http_method': 'DELETE'})
 
 class UserProfileViewSet(viewsets.ModelViewSet):
