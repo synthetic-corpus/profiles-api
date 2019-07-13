@@ -9,4 +9,7 @@ class UpdateOwnProfile(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         
+        """ Does the Requester ID match the ID of the Object in Question? """
+        """ If True, this request will allow the requester to make all changes. """
+        
         return obj.id == request.user.id
