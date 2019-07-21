@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
-
+from django.conf import settings
 
 class UserProfileManager(BaseUserManager):
     """ Manager for User Profiles """
@@ -56,3 +56,17 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
         """ Return string representation of user. """
         """ Not required, but recommended to avoid gibberish. """
         return self.email
+
+class ProfileFeedItem(models.Model):
+    """ A Profile Status update """
+    """ models.ForeignKey sets up a relationship to another model, and thus another SQL table. """
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    status_text = models.CharField(max_length=255)
+    create_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__ (self):
+        """ return model as a string. """
+        return self.status_text

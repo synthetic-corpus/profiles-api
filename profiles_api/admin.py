@@ -6,3 +6,4 @@ from profiles_api import models
 # Registering them here makes them accessible via an admin CLI account.
 
 admin.site.register(models.UserProfile)
+admin.site.register(models.ProfileFeedItem)

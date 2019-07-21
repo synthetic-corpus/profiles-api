@@ -116,3 +116,13 @@ class UserLoginApiView(ObtainAuthToken):
     """ Handle creating user authentication tokens """
     """ Renderer classes allows the login to render on the default django page. """
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+class UserProfileFeedViewSet(viewsets.ModelViewSet):
+    """ Handles creating, reading, and updating profile feed items! """
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.ProfileFeedItemSerializer
+    queryset = models.ProfileFeedItem.objects.all()
+
+    def perform_create(self, serializer):
+        """ Sets the user profile to the logged in user """
+        serializer.save(user_profile=self.request.user)
